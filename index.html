@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>M. Sacchi Arquitetura — Jundiaí</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sand:   #F2EDE4;
+  --linen:  #EBE4D8;
+  --stone:  #D6CCBC;
+  --bark:   #7C6A52;
+  --bark-d: #5C4E3A;
+  --soil:   #2C2419;
+  --mist:   rgba(44,36,25,.07);
+  --rule:   rgba(44,36,25,.13);
+  --serif:  'Cormorant', serif;
+  --sans:   'Jost', sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--sand);color:var(--soil);font-weight:300;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.6rem 4rem;
+  background:rgba(242,237,228,.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--rule);
+  transition:padding .4s;
+}
+.nav-logo{
+  font-family:var(--serif);font-size:1.25rem;font-weight:400;
+  letter-spacing:.05em;color:var(--soil);text-decoration:none;
+}
+.nav-logo span{color:var(--bark);font-style:italic}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  font-family:var(--sans);font-size:.7rem;font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--soil);opacity:.55;text-decoration:none;transition:opacity .25s;
+}
+.nav-links a:hover{opacity:1}
+.nav-cta{
+  padding:.55rem 1.6rem;
+  border:1px solid var(--bark);
+  font-family:var(--sans);font-size:.65rem;font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--bark);text-decoration:none;
+  transition:background .25s,color .25s;
+}
+.nav-cta:hover{background:var(--bark);color:var(--sand)}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:0 4rem 5rem;
+  padding-top:80px;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:var(--linen);
+  overflow:hidden;
+}
+/* Textura rústica via SVG inline */
+.hero-bg svg{position:absolute;inset:0;width:100%;height:100%;opacity:.18}
+.hero-tag{
+  position:relative;z-index:1;
+  font-family:var(--sans);font-size:.65rem;font-weight:400;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:var(--bark);margin-bottom:1.6rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.hero-tag::before{content:'';display:block;width:2rem;height:1px;background:var(--bark)}
+.hero-headline{
+  position:relative;z-index:1;
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(3.5rem,8vw,7.5rem);
+  line-height:.95;letter-spacing:-.01em;
+  color:var(--soil);margin-bottom:3rem;
+}
+.hero-headline em{font-style:italic;color:var(--bark)}
+.hero-bottom{
+  position:relative;z-index:1;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:2rem;
+}
+.hero-desc{
+  font-family:var(--sans);font-size:.95rem;font-weight:300;
+  line-height:1.85;color:var(--soil);opacity:.65;max-width:38ch;
+}
+.hero-stats{display:flex;gap:3rem}
+.hero-stat{display:flex;flex-direction:column;gap:.3rem;text-align:right}
+.hero-stat-n{
+  font-family:var(--serif);font-size:2.8rem;font-weight:300;
+  line-height:1;color:var(--bark);
+}
+.hero-stat-l{
+  font-family:var(--sans);font-size:.6rem;font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--soil);opacity:.45;
+}
+.scroll-line{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:1px;height:3rem;background:var(--bark);opacity:.3;
+}
+
+/* ── SEÇÕES GENÉRICAS ── */
+.section-inner{max-width:1200px;margin:0 auto;padding:7rem 4rem}
+.section-label{
+  font-family:var(--sans);font-size:.6rem;font-weight:400;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:var(--bark);margin-bottom:1rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.section-label::before{content:'';display:block;width:1.5rem;height:1px;background:var(--bark)}
+.section-title{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(2.2rem,4vw,3.5rem);line-height:1.1;
+  color:var(--soil);margin-bottom:1.5rem;
+}
+.section-title em{font-style:italic;color:var(--bark)}
+.rule{width:3rem;height:1px;background:var(--bark);opacity:.4;margin:2rem 0}
+
+/* ── SOBRE ── */
+#sobre{background:var(--sand);border-top:1px solid var(--rule)}
+.sobre-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:6rem;align-items:center;
+}
+.sobre-text p{
+  font-family:var(--sans);font-size:.95rem;font-weight:300;
+  line-height:1.9;color:var(--soil);opacity:.7;margin-bottom:1.1rem;
+}
+.sobre-text p strong{font-weight:500;opacity:1;color:var(--soil)}
+.sobre-aside{display:flex;flex-direction:column;gap:0}
+.aside-row{
+  display:flex;flex-direction:column;gap:.35rem;
+  padding:1.5rem 0;border-bottom:1px solid var(--rule);
+}
+.aside-row:first-child{padding-top:0}
+.aside-row:last-child{border-bottom:none}
+.aside-label{
+  font-family:var(--sans);font-size:.58rem;font-weight:400;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--bark);
+}
+.aside-val{
+  font-family:var(--sans);font-size:.9rem;font-weight:300;
+  color:var(--soil);opacity:.7;line-height:1.5;
+}
+
+/* ── SERVIÇOS ── */
+#servicos{background:var(--linen);border-top:1px solid var(--rule)}
+.serv-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--rule);margin-top:4rem;
+}
+.serv-card{
+  background:var(--linen);padding:3rem 2.5rem;
+  transition:background .3s;
+  display:flex;flex-direction:column;gap:1.2rem;
+}
+.serv-card:hover{background:var(--sand)}
+.serv-n{
+  font-family:var(--serif);font-size:.85rem;font-weight:300;
+  color:var(--bark);opacity:.5;
+}
+.serv-name{
+  font-family:var(--serif);font-size:1.55rem;font-weight:300;
+  color:var(--soil);line-height:1.25;
+}
+.serv-bar{width:2rem;height:1px;background:var(--bark);opacity:.4;transition:width .3s}
+.serv-card:hover .serv-bar{width:3.5rem}
+.serv-desc{
+  font-family:var(--sans);font-size:.85rem;font-weight:300;
+  line-height:1.85;color:var(--soil);opacity:.6;
+}
+
+/* ── PORTFÓLIO ── */
+#portfolio{background:var(--sand);border-top:1px solid var(--rule)}
+.proj-header{
+  display:flex;justify-content:space-between;
+  align-items:flex-end;margin-bottom:4rem;
+}
+.proj-note{
+  font-family:var(--sans);font-size:.82rem;font-weight:300;
+  color:var(--soil);opacity:.5;max-width:30ch;text-align:right;line-height:1.7;
+}
+.proj-list{display:flex;flex-direction:column;gap:1px;background:var(--rule)}
+.proj-row{
+  background:var(--sand);
+  display:grid;grid-template-columns:220px 1fr auto;
+  gap:3rem;align-items:center;padding:2rem 0;
+  transition:background .25s;
+  position:relative;
+}
+.proj-row::after{
+  content:'';position:absolute;left:0;bottom:0;right:0;height:1px;background:var(--rule);
+}
+.proj-thumb{
+  width:220px;height:148px;background:var(--linen);overflow:hidden;flex-shrink:0;
+}
+.proj-thumb svg{width:100%;height:100%}
+.proj-row:hover{background:var(--linen)}
+.proj-cat{
+  font-family:var(--sans);font-size:.58rem;font-weight:400;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--bark);margin-bottom:.5rem;
+}
+.proj-name{
+  font-family:var(--serif);font-size:1.6rem;font-weight:300;
+  color:var(--soil);line-height:1.15;margin-bottom:.6rem;
+}
+.proj-meta{
+  font-family:var(--sans);font-size:.8rem;font-weight:300;
+  color:var(--soil);opacity:.45;font-style:italic;
+}
+.proj-yr{
+  font-family:var(--sans);font-size:.65rem;font-weight:400;
+  letter-spacing:.15em;color:var(--soil);opacity:.3;white-space:nowrap;
+}
+
+/* ── PROCESSO ── */
+#processo{background:var(--soil);border-top:1px solid rgba(255,255,255,.08)}
+#processo .section-label{color:var(--stone)}
+#processo .section-label::before{background:var(--stone)}
+#processo .section-title{color:var(--sand)}
+#processo .section-title em{color:var(--stone)}
+#processo .rule{background:var(--stone)}
+.proc-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:1px;background:rgba(255,255,255,.08);margin-top:4rem;
+}
+.proc-step{
+  background:var(--soil);padding:3rem 2rem;
+  display:flex;flex-direction:column;gap:1.2rem;
+  transition:background .3s;
+}
+.proc-step:hover{background:#362d22}
+.proc-n{
+  font-family:var(--serif);font-size:.85rem;font-weight:300;color:var(--stone);opacity:.45;
+}
+.proc-title{
+  font-family:var(--serif);font-size:1.25rem;font-weight:300;
+  color:var(--sand);line-height:1.25;
+}
+.proc-bar{width:1.5rem;height:1px;background:var(--stone);opacity:.3;transition:width .3s}
+.proc-step:hover .proc-bar{width:2.5rem;opacity:.6}
+.proc-desc{
+  font-family:var(--sans);font-size:.8rem;font-weight:300;
+  line-height:1.85;color:var(--sand);opacity:.45;
+}
+
+/* ── CONTATO ── */
+#contato{background:var(--linen);border-top:1px solid var(--rule)}
+.contato-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;
+}
+.contato-lead{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.5rem,3vw,2.2rem);line-height:1.45;
+  color:var(--soil);opacity:.75;margin-bottom:3rem;
+}
+.contato-lead em{font-style:italic;color:var(--bark)}
+.info-block{display:flex;flex-direction:column;gap:0}
+.info-row{
+  padding:1.25rem 0;border-bottom:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:.3rem;
+}
+.info-row:last-child{border-bottom:none}
+.info-lbl{
+  font-family:var(--sans);font-size:.58rem;font-weight:400;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--bark);
+}
+.info-val{
+  font-family:var(--sans);font-size:.92rem;font-weight:300;
+  color:var(--soil);opacity:.7;line-height:1.5;
+}
+.info-val a{color:inherit;text-decoration:none}
+.info-val a:hover{color:var(--bark)}
+
+/* form */
+.f-group{margin-bottom:2rem}
+.f-group label{
+  display:block;
+  font-family:var(--sans);font-size:.58rem;font-weight:400;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--soil);opacity:.45;margin-bottom:.65rem;
+}
+.f-group input,.f-group select,.f-group textarea{
+  width:100%;background:transparent;border:none;
+  border-bottom:1px solid rgba(44,36,25,.25);
+  padding:.45rem 0 .75rem;
+  font-family:var(--sans);font-size:.95rem;font-weight:300;
+  color:var(--soil);outline:none;transition:border-color .25s;
+  -webkit-appearance:none;appearance:none;border-radius:0;
+}
+.f-group select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='5'%3E%3Cpath d='M0 0l5 5 5-5z' fill='%237C6A52'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 0 center;padding-right:1.5rem;cursor:pointer;
+}
+.f-group select option{background:var(--linen)}
+.f-group input:focus,.f-group select:focus,.f-group textarea:focus{border-color:var(--bark)}
+.f-group textarea{resize:none;min-height:80px}
+.f-row2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.btn-send{
+  display:flex;align-items:center;gap:1.2rem;
+  background:var(--bark-d);border:none;
+  padding:1rem 2.5rem;cursor:pointer;
+  font-family:var(--sans);font-size:.7rem;font-weight:400;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--sand);width:100%;justify-content:center;
+  transition:background .25s;margin-top:.5rem;
+}
+.btn-send:hover{background:var(--soil)}
+.form-ok{
+  display:none;padding:3rem 0;text-align:center;
+}
+.form-ok p{
+  font-family:var(--serif);font-size:1.6rem;font-style:italic;
+  color:var(--bark);line-height:1.5;
+}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--soil);padding:2.5rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(255,255,255,.07);
+}
+.ft-logo{
+  font-family:var(--serif);font-size:1rem;font-weight:300;
+  color:var(--sand);opacity:.7;
+}
+.ft-logo span{font-style:italic;color:var(--stone)}
+.ft-copy{
+  font-family:var(--sans);font-size:.6rem;font-weight:300;
+  letter-spacing:.12em;color:var(--sand);opacity:.25;
+}
+.ft-links{display:flex;gap:2rem}
+.ft-links a{
+  font-family:var(--sans);font-size:.6rem;font-weight:300;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--sand);opacity:.3;text-decoration:none;transition:opacity .25s;
+}
+.ft-links a:hover{opacity:.8}
+
+/* ── WHATSAPP ── */
+.btn-whatsapp{
+  display:inline-flex;align-items:center;gap:.75rem;
+  margin-top:2rem;
+  padding:.85rem 1.8rem;
+  background:#3d6b4f;
+  color:#fff;text-decoration:none;
+  font-family:var(--sans);font-size:.7rem;font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;
+  transition:background .25s;
+}
+.btn-whatsapp:hover{background:#2e5240}
+.btn-whatsapp svg{flex-shrink:0}
+.wa-float{
+  position:fixed;bottom:2rem;right:2rem;z-index:999;
+  width:3.2rem;height:3.2rem;border-radius:50%;
+  background:#25d366;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(0,0,0,.2);
+  text-decoration:none;
+  transition:transform .2s,background .2s;
+}
+.wa-float:hover{transform:scale(1.08);background:#1ebe5d}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .85s ease,transform .85s ease}
+.rv.on{opacity:1;transform:none}
+
+/* ── MOBILE ── */
+@media(max-width:900px){
+  nav{padding:1.2rem 1.5rem}
+  .nav-links,.nav-cta{display:none}
+  #hero{padding:0 1.5rem 4rem;padding-top:80px}
+  .hero-bottom{flex-direction:column;align-items:flex-start}
+  .hero-stats{flex-direction:row;gap:2rem}
+  .hero-stat{text-align:left}
+  .section-inner{padding:5rem 1.5rem}
+  .sobre-grid,.contato-grid{grid-template-columns:1fr;gap:3rem}
+  .serv-grid{grid-template-columns:1fr 1fr}
+  .proc-grid{grid-template-columns:1fr 1fr}
+  .proj-row{grid-template-columns:1fr;gap:1rem}
+  .proj-thumb{width:100%;height:180px}
+  .proj-yr{display:none}
+  footer{flex-direction:column;gap:1.2rem;padding:2rem 1.5rem;text-align:center}
+  .ft-links{justify-content:center}
+}
+@media(max-width:560px){
+  .serv-grid{grid-template-columns:1fr}
+  .proc-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#hero">M. <span>Sacchi</span></a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#portfolio">Projetos</a></li>
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#contato" class="nav-cta">Falar connosco</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <!-- Grain / textura natural -->
+    <svg viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+      <rect width="100%" height="100%" filter="url(#noise)" opacity=".55"/>
+      <!-- linhas leves de planta baixa -->
+      <line x1="0" y1="320" x2="800" y2="320" stroke="#7C6A52" stroke-width=".5" opacity=".35"/>
+      <line x1="0" y1="600" x2="800" y2="600" stroke="#7C6A52" stroke-width=".5" opacity=".2"/>
+      <line x1="260" y1="0" x2="260" y2="900" stroke="#7C6A52" stroke-width=".5" opacity=".25"/>
+      <line x1="560" y1="0" x2="560" y2="900" stroke="#7C6A52" stroke-width=".5" opacity=".18"/>
+      <rect x="70" y="150" width="160" height="140" fill="none" stroke="#7C6A52" stroke-width=".6" opacity=".22"/>
+      <rect x="290" y="150" width="230" height="140" fill="none" stroke="#7C6A52" stroke-width=".6" opacity=".18"/>
+      <rect x="580" y="180" width="160" height="100" fill="none" stroke="#7C6A52" stroke-width=".4" opacity=".15"/>
+    </svg>
+  </div>
+
+  <p class="hero-tag">Arquitetura &amp; Interiores — Jundiaí, SP</p>
+
+  <h1 class="hero-headline">
+    Espaços que<br>
+    <em>resistem</em><br>
+    ao tempo.
+  </h1>
+
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      25 anos de prática silenciosa em Jundiaí e região.<br>
+      Do esboço à obra — sem atalhos.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-n">25+</span>
+        <span class="hero-stat-l">Anos</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-n">200+</span>
+        <span class="hero-stat-l">Projetos</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-line"></div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-inner">
+    <div class="sobre-grid">
+      <div class="rv">
+        <p class="section-label">Sobre o escritório</p>
+        <h2 class="section-title">Mauro Sacchi,<br><em>Arquiteto</em></h2>
+        <div class="rule"></div>
+        <div class="sobre-text">
+          <p>O escritório <strong>M. Sacchi Arquitetura</strong> atua há mais de 25 anos em Jundiaí e região, desenvolvendo projetos residenciais, comerciais, de interiores e paisagismo com uma abordagem que privilegia a escuta acima de tudo.</p>
+          <p>A trajetória do escritório é marcada pela recusa do genérico. Cada projeto parte de uma conversa longa — sobre modo de vida, sobre aspirações, sobre o que realmente importa — e só então o lápis começa a mover-se.</p>
+          <p>Materiais naturais, proporções cuidadas, luz trabalhada. <strong>Arquitetura que envelhece bem</strong> porque foi pensada para durar.</p>
+        </div>
+      </div>
+      <div class="sobre-aside rv">
+        <div class="aside-row">
+          <span class="aside-label">Localização</span>
+          <span class="aside-val">Rua Comendador Gumercindo Barranqueiros<br>Jardim Samambaia — Jundiaí, SP</span>
+        </div>
+        <div class="aside-row">
+          <span class="aside-label">Fundação</span>
+          <span class="aside-val">1998</span>
+        </div>
+        <div class="aside-row">
+          <span class="aside-label">Especialidades</span>
+          <span class="aside-val">Residencial · Comercial<br>Interiores · Paisagismo<br>Administração de Obras</span>
+        </div>
+        <div class="aside-row">
+          <span class="aside-label">Contacto</span>
+          <span class="aside-val">(11) 4521-1798<br>(11) 99606-6222</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="section-inner">
+    <div class="rv">
+      <p class="section-label">O que fazemos</p>
+      <h2 class="section-title">Serviços</h2>
+    </div>
+    <div class="serv-grid rv">
+      <div class="serv-card">
+        <span class="serv-n">01</span>
+        <h3 class="serv-name">Projetos Residenciais</h3>
+        <div class="serv-bar"></div>
+        <p class="serv-desc">Casas e apartamentos pensados para a vida real de cada família. Alto padrão é adequação — não ostentação.</p>
+      </div>
+      <div class="serv-card">
+        <span class="serv-n">02</span>
+        <h3 class="serv-name">Projetos Comerciais</h3>
+        <div class="serv-bar"></div>
+        <p class="serv-desc">Espaços que trabalham — onde cada metro quadrado serve a produtividade, a marca e a experiência de quem os usa.</p>
+      </div>
+      <div class="serv-card">
+        <span class="serv-n">03</span>
+        <h3 class="serv-name">Design de Interiores</h3>
+        <div class="serv-bar"></div>
+        <p class="serv-desc">Do mobiliário à iluminação, dos revestimentos ao detalhe de marcenaria — ambientes com alma, pensados como um todo.</p>
+      </div>
+      <div class="serv-card">
+        <span class="serv-n">04</span>
+        <h3 class="serv-name">Paisagismo</h3>
+        <div class="serv-bar"></div>
+        <p class="serv-desc">A arquitetura não termina onde começa o jardim. O exterior é tão projetado quanto o interior.</p>
+      </div>
+      <div class="serv-card">
+        <span class="serv-n">05</span>
+        <h3 class="serv-name">Administração de Obras</h3>
+        <div class="serv-bar"></div>
+        <p class="serv-desc">Fiscalização e gestão técnica da execução — o arquiteto presente em obra, do primeiro bloco à última demão de tinta.</p>
+      </div>
+      <div class="serv-card" style="background:var(--bark-d);cursor:default">
+        <p style="font-family:var(--serif);font-size:1.4rem;font-weight:300;font-style:italic;color:var(--sand);line-height:1.5;opacity:.85;margin-top:auto">
+          "Um projeto, um interlocutor. Do briefing à entrega das chaves."
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFÓLIO -->
+<section id="portfolio">
+  <div class="section-inner">
+    <div class="proj-header rv">
+      <div>
+        <p class="section-label">Trabalhos selecionados</p>
+        <h2 class="section-title">Portfólio</h2>
+      </div>
+      <p class="proj-note">Uma seleção de projetos realizados. Para uma apresentação completa, entre em contacto.</p>
+    </div>
+
+    <div class="proj-list">
+
+      <div class="proj-row rv">
+        <div class="proj-thumb">
+          <svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+            <rect width="220" height="148" fill="#E5DFD5"/>
+            <rect x="15" y="25" width="190" height="95" fill="none" stroke="#7C6A52" stroke-width=".6" opacity=".35"/>
+            <rect x="30" y="40" width="65" height="65" fill="#D8D0C4" opacity=".9"/>
+            <rect x="112" y="52" width="75" height="53" fill="#D8D0C4" opacity=".7"/>
+            <line x1="15" y1="120" x2="205" y2="120" stroke="#7C6A52" stroke-width=".4" opacity=".28"/>
+            <text x="110" y="138" text-anchor="middle" fill="#7C6A52" font-family="serif" font-size="7" letter-spacing="3" opacity=".4">FOTO DO PROJETO</text>
+          </svg>
+        </div>
+        <div class="proj-info">
+          <p class="proj-cat">Residencial</p>
+          <h3 class="proj-name">Residência O.</h3>
+          <p class="proj-meta">Jundiaí, SP — Construção nova, 320 m²</p>
+        </div>
+        <span class="proj-yr">2022</span>
+      </div>
+
+      <div class="proj-row rv">
+        <div class="proj-thumb">
+          <svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+            <rect width="220" height="148" fill="#DDD7CC"/>
+            <rect x="20" y="22" width="180" height="100" fill="none" stroke="#7C6A52" stroke-width=".6" opacity=".3"/>
+            <rect x="35" y="38" width="42" height="68" fill="#CFC8BB" opacity=".85"/>
+            <rect x="90" y="38" width="42" height="68" fill="#CFC8BB" opacity=".85"/>
+            <rect x="148" y="50" width="30" height="56" fill="#CFC8BB" opacity=".6"/>
+            <text x="110" y="138" text-anchor="middle" fill="#7C6A52" font-family="serif" font-size="7" letter-spacing="3" opacity=".35">FOTO DO PROJETO</text>
+          </svg>
+        </div>
+        <div class="proj-info">
+          <p class="proj-cat">Comercial</p>
+          <h3 class="proj-name">Edifício Corporativo</h3>
+          <p class="proj-meta">Jundiaí, SP — Reforma e retrofit</p>
+        </div>
+        <span class="proj-yr">2021</span>
+      </div>
+
+      <div class="proj-row rv">
+        <div class="proj-thumb">
+          <svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+            <rect width="220" height="148" fill="#E8E2D7"/>
+            <rect x="18" y="28" width="184" height="90" fill="none" stroke="#7C6A52" stroke-width=".5" opacity=".28"/>
+            <line x1="18" y1="73" x2="202" y2="73" stroke="#7C6A52" stroke-width=".4" opacity=".22"/>
+            <line x1="110" y1="28" x2="110" y2="118" stroke="#7C6A52" stroke-width=".4" opacity=".22"/>
+            <rect x="30" y="40" width="68" height="50" fill="#DDD7CC" opacity=".75"/>
+            <rect x="128" y="40" width="60" height="50" fill="#DDD7CC" opacity=".7"/>
+            <text x="110" y="138" text-anchor="middle" fill="#7C6A52" font-family="serif" font-size="7" letter-spacing="3" opacity=".35">FOTO DO PROJETO</text>
+          </svg>
+        </div>
+        <div class="proj-info">
+          <p class="proj-cat">Interiores</p>
+          <h3 class="proj-name">Residência M.</h3>
+          <p class="proj-meta">Jundiaí, SP — Design de interiores completo</p>
+        </div>
+        <span class="proj-yr">2020</span>
+      </div>
+
+      <div class="proj-row rv">
+        <div class="proj-thumb">
+          <svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+            <rect width="220" height="148" fill="#E2DCD1"/>
+            <ellipse cx="110" cy="72" rx="68" ry="46" fill="none" stroke="#7C6A52" stroke-width=".5" opacity=".28"/>
+            <ellipse cx="110" cy="72" rx="40" ry="28" fill="#D6CFBF" opacity=".55"/>
+            <circle cx="72" cy="60" r="7" fill="#C8C0B0" opacity=".6"/>
+            <circle cx="152" cy="84" r="5" fill="#C8C0B0" opacity=".55"/>
+            <circle cx="110" cy="48" r="4" fill="#C8C0B0" opacity=".5"/>
+            <text x="110" y="138" text-anchor="middle" fill="#7C6A52" font-family="serif" font-size="7" letter-spacing="3" opacity=".35">FOTO DO PROJETO</text>
+          </svg>
+        </div>
+        <div class="proj-info">
+          <p class="proj-cat">Paisagismo</p>
+          <h3 class="proj-name">Área Externa — Residência V.</h3>
+          <p class="proj-meta">Jundiaí, SP — Paisagismo integrado</p>
+        </div>
+        <span class="proj-yr">2019</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo">
+  <div class="section-inner">
+    <div class="rv">
+      <p class="section-label">Como trabalhamos</p>
+      <h2 class="section-title">Do esboço<br>à <em>entrega</em></h2>
+    </div>
+    <div class="proc-grid rv">
+      <div class="proc-step">
+        <span class="proc-n">01</span>
+        <h4 class="proc-title">Briefing e escuta</h4>
+        <div class="proc-bar"></div>
+        <p class="proc-desc">Uma conversa longa, sem pressa. Entender o cliente é o primeiro projeto.</p>
+      </div>
+      <div class="proc-step">
+        <span class="proc-n">02</span>
+        <h4 class="proc-title">Conceito</h4>
+        <div class="proc-bar"></div>
+        <p class="proc-desc">Volumetria, implantação, linguagem. O partido que vai guiar todo o resto.</p>
+      </div>
+      <div class="proc-step">
+        <span class="proc-n">03</span>
+        <h4 class="proc-title">Projeto executivo</h4>
+        <div class="proc-bar"></div>
+        <p class="proc-desc">Plantas, cortes, detalhamentos. Projetos complementares coordenados.</p>
+      </div>
+      <div class="proc-step">
+        <span class="proc-n">04</span>
+        <h4 class="proc-title">Aprovação legal</h4>
+        <div class="proc-bar"></div>
+        <p class="proc-desc">Alvará e regularização junto à Prefeitura e órgãos competentes.</p>
+      </div>
+      <div class="proc-step">
+        <span class="proc-n">05</span>
+        <h4 class="proc-title">Obra</h4>
+        <div class="proc-bar"></div>
+        <p class="proc-desc">Administração e fiscalização. O projeto fielmente executado, sem improvisos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="section-inner">
+    <div class="rv" style="margin-bottom:4rem">
+      <p class="section-label">Fale connosco</p>
+      <h2 class="section-title">O seu projeto<br>começa com<br><em>uma conversa.</em></h2>
+    </div>
+    <div class="contato-grid">
+      <div class="rv">
+        <p class="contato-lead">Conte-nos sobre o seu espaço, os seus sonhos e as suas necessidades — estamos prontos para ouvir.</p>
+        <div class="info-block">
+          <div class="info-row">
+            <span class="info-lbl">Endereço</span>
+            <span class="info-val">Rua Comendador Gumercindo Barranqueiros<br>Jardim Samambaia — Jundiaí, SP</span>
+          </div>
+          <div class="info-row">
+            <span class="info-lbl">Telefone</span>
+            <span class="info-val">(11) 4521-1798<br>(11) 99606-6222</span>
+          </div>
+          <div class="info-row">
+            <span class="info-lbl">E-mail</span>
+            <span class="info-val">arqmsacchi@yahoo.com.br</span>
+          </div>
+          <div class="info-row">
+            <span class="info-lbl">WhatsApp</span>
+            <span class="info-val">
+              <a class="btn-whatsapp" href="https://wa.me/5511996066222?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto.%20Poderia%20me%20dar%20mais%20informações%3F" target="_blank">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Chamar no WhatsApp
+              </a>
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="info-lbl">Instagram</span>
+            <span class="info-val"><a href="https://www.instagram.com/msacchiarquitetura/" target="_blank">@msacchiarquitetura</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-lbl">Facebook</span>
+            <span class="info-val"><a href="https://www.facebook.com/arqmsacchi/" target="_blank">M. Sacchi Arquitetura</a></span>
+          </div>
+        </div>
+      </div>
+      <div class="rv">
+        <form id="form" action="https://formspree.io/f/mdabblzj" method="POST">
+          <div class="f-row2">
+            <div class="f-group">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" required/>
+            </div>
+            <div class="f-group">
+              <label for="tel">Telefone</label>
+              <input type="tel" id="tel" name="telefone"/>
+            </div>
+          </div>
+          <div class="f-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required/>
+          </div>
+          <div class="f-group">
+            <label for="tipo">Tipo de projeto</label>
+            <select id="tipo" name="tipo">
+              <option value="" disabled selected></option>
+              <option>Residencial</option>
+              <option>Comercial</option>
+              <option>Interiores</option>
+              <option>Paisagismo</option>
+              <option>Administração de obras</option>
+              <option>Outro</option>
+            </select>
+          </div>
+          <div class="f-group">
+            <label for="msg">Mensagem</label>
+            <textarea id="msg" name="mensagem" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn-send">Enviar mensagem</button>
+        </form>
+        <div class="form-ok" id="ok">
+          <p>Mensagem recebida.<br>Entraremos em contacto em breve.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP FLUTUANTE -->
+<a class="wa-float" href="https://wa.me/5511996066222?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto.%20Poderia%20me%20dar%20mais%20informações%3F" target="_blank" aria-label="WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- FOOTER -->
+<footer>
+  <span class="ft-logo">M. <span>Sacchi</span> Arquitetura</span>
+  <span class="ft-copy">© 2025 M. Sacchi Arquitetura · Jundiaí, SP</span>
+  <div class="ft-links">
+    <a href="https://www.instagram.com/msacchiarquitetura/" target="_blank">Instagram</a>
+    <a href="https://www.facebook.com/arqmsacchi/" target="_blank">Facebook</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const obs = new IntersectionObserver(e=>{
+    e.forEach(el=>{ if(el.isIntersecting){el.target.classList.add('on');obs.unobserve(el.target)} })
+  },{threshold:.08});
+  document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+  // Nav shrink
+  window.addEventListener('scroll',()=>{
+    document.getElementById('nav').style.padding = scrollY>60?'1rem 4rem':'1.6rem 4rem';
+  });
+
+  // Form
+  document.getElementById('form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('.btn-send');
+    btn.textContent = 'A enviar...';
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('ok').style.display = 'block';
+      } else {
+        btn.textContent = 'Erro — tente novamente';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Erro — tente novamente';
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
